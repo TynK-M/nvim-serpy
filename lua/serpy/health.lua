@@ -8,9 +8,10 @@ local M = {}
 local function check_neovim_version()
     if vim.fn.has("nvim-0.12.0") ~= 1 then
         error("serpy requires Neovim >= 0.12.0")
-        return
+        return false
     else
         ok("Neovim >= 0.12.0")
+        return true
     end
 end
 
@@ -18,14 +19,14 @@ local function check_serpy_module()
     local ok_load, serpy = pcall(require, "serpy")
     if ok_load then
         ok("serpy module is loadable")
+        return true
     else
         error("serpy module failed to load: " .. serpy)
-        return
+        return false
     end
 end
 
 local function check_python()
-local python_found = false
     local python_executables = { "python", "python3", "py" }
 
     for _, executable in ipairs(python_executables) do
@@ -33,13 +34,13 @@ local python_found = false
             local version_cmd = string.format("%s --version", executable)
             local version = vim.fn.system(version_cmd)
             ok(string.format("Python found: %s (%s)", executable, version:gsub("\n", "")))
-            python_found = true
-            break
+            return true
         end
     end
 
     if not python_found then
         error("Python is required but not found. Install python, python3, or py and make sure it's in your PATH")
+        return false
     end
 end
 
