@@ -20,4 +20,19 @@ function M.isPythonFile(path)
 	return path:match("%.py") ~= nil
 end
 
+function M.validatePythonFile()
+	local py = M.getPythonCmd()
+	local path = M.getOpenFilePath()
+
+	if not path or path == "" then
+		return nil, "Current buffer has no file name. Please save it first"
+	end
+
+	if not M.isPythonFile(path) then
+		return nil, "The current file is not a Python file"
+	end
+
+	return py, path
+end
+
 return M
