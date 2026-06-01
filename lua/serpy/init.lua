@@ -49,4 +49,19 @@ function M.runPyFileWithFlags()
 	_runPython(path_or_err, py, flags)
 end
 
+function M.pydoc()
+	local py = utils.getPythonCmd()
+
+	local doc_to_search = ""
+	vim.ui.input({ prompt = "Docs " }, function(input)
+		if input then
+			doc_to_search = input
+		end
+	end)
+
+	vim.cmd("botright 15split")
+	vim.cmd("terminal " .. py .. " -m pydoc " .. doc_to_search)
+	vim.cmd("startinsert")
+end
+
 return M
