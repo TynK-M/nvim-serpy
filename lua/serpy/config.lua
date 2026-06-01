@@ -5,6 +5,7 @@ M.defaults = {
 		enabled = true,
 
 		pyrun_current = "<leader>pc",
+		pyrun_current_with_flags = "<leader>pf",
 	},
 }
 

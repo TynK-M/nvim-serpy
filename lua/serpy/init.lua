@@ -18,7 +18,7 @@ local function _runPython(path, py, flags)
 	vim.cmd("write")
 
 	vim.cmd("botright 15split")
-	vim.cmd("terminal " .. py .. " " .. vim.fn.shellescape(path))
+	vim.cmd("terminal " .. py .. " " .. vim.fn.shellescape(path) .. " " .. flags)
 	vim.cmd("startinsert")
 end
 
@@ -30,6 +30,23 @@ function M.runPyFile()
 	end
 
 	_runPython(path_or_err, py)
+end
+
+function M.runPyFileWithFlags()
+	local py, path_or_err = utils.validatePythonFile()
+	if not py then
+		logger.error(path_or_err)
+		return
+	end
+
+	local flags = ""
+	vim.ui.input({ prompt = "Flags: " }, function(input)
+		if input then
+			flags = input
+		end
+	end)
+
+	_runPython(path_or_err, py, flags)
 end
 
 return M

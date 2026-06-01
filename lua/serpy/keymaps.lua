@@ -11,6 +11,10 @@ function M.setup(opts)
 	map("n", km.pyrun_current, function()
 		require("serpy").runPyFile()
 	end, { desc = "serpy: run current file" })
+
+	map("n", km.pyrun_current_with_flags, function()
+		require("serpy").runPyFileWithFlags()
+	end, { desc = "serpy: run current file with flags" })
 end
 
 return M
