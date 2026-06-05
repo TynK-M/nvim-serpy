@@ -44,8 +44,10 @@ By default serpy adds:
 | Keymap | Action |
 | ------------ | ----------------------- |
 | `<leader>pc` | Run current Python file |
+| <leader>pf | Run current Python file with flags |
+| <leader>ph | Search a term in pydoc |
 
-When triggered, serpy will:
+When triggering a run current file, serpy will:
 
 1. Save the current buffer
 1. Open a bottom terminal split
@@ -85,4 +87,3 @@ ______________________________________________________________________
 ## License
 
 serpy is licensed under [MIT License](LICENSE)
-
