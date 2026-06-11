@@ -1,5 +1,9 @@
 local M = {}
 
+function M.getCurrentWord()
+	return vim.fn.expand("<cword>") or ""
+end
+
 function M.getPythonCmd()
 	if vim.fn.executable("python3") == 1 then
 		return "python3"

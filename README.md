@@ -46,6 +46,7 @@ By default serpy adds:
 | `<leader>pc` | Run current Python file |
 | <leader>pf | Run current Python file with flags |
 | <leader>ph | Search a term in pydoc |
+| <leader>pw | Search current word in pydoc |
 
 When triggering a run current file, serpy will:
 

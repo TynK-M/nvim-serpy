@@ -19,6 +19,10 @@ function M.setup(opts)
 	map("n", km.pydoc, function()
 		require("serpy").pydoc()
 	end, { desc = "serpy: search a term in the pydoc" })
+
+	map("n", km.pydoc_current_word, function()
+		require("serpy").pydocCurrentWord()
+	end, { desc = "serpy: search current word in the pydoc" })
 end
 
 return M

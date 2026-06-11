@@ -22,6 +22,12 @@ local function _runPython(path, py, flags)
 	vim.cmd("startinsert")
 end
 
+local function _runPyDoc(py, term)
+	vim.cmd("botright 15split")
+	vim.cmd("terminal " .. py .. " -m pydoc " .. term)
+	vim.cmd("startinsert")
+end
+
 function M.runPyFile()
 	local py, path_or_err = utils.validatePythonFile()
 	if not py then
@@ -52,16 +58,22 @@ end
 function M.pydoc()
 	local py = utils.getPythonCmd()
 
-	local doc_to_search = ""
+	local term = ""
 	vim.ui.input({ prompt = "Docs " }, function(input)
 		if input then
-			doc_to_search = input
+			term = input
 		end
 	end)
 
-	vim.cmd("botright 15split")
-	vim.cmd("terminal " .. py .. " -m pydoc " .. doc_to_search)
-	vim.cmd("startinsert")
+	_runPyDoc(py, term)
+end
+
+function M.pydocCurrentWord()
+	local py = utils.getPythonCmd()
+
+	local term = utils.getCurrentWord()
+
+	_runPyDoc(py, term)
 end
 
 return M

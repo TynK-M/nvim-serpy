@@ -7,6 +7,7 @@ M.defaults = {
 		pyrun_current = "<leader>pc",
 		pyrun_current_with_flags = "<leader>pf",
 		pydoc = "<leader>pd",
+		pydoc_current_word = "<leader>pw",
 	},
 }
 
