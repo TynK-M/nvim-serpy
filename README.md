@@ -1,23 +1,23 @@
 # nvim-serpy
 
-A minimal Neovim plugin to quickly run the current Python file in a terminal split.
+A minimal Neovim plugin for running and interacting with code from multiple programming languages via a pluggable execution system.
 
 ______________________________________________________________________
 
 ## Features
 
-- Run the current Python buffer instantly
-- Automatically saves file before execution
-- Opens a terminal split in Neovim
-- Lightweight and dependency-free
-- Fully customizable keymaps
+- Run the current file based on detected/selected language
+- Extensible module system for adding new languages
+- Automatically saves buffer before execution
+- Opens terminal split for program output
+- Fully customizable keymaps and languages
 
 ______________________________________________________________________
 
 ## Requirements
 
 - Neovim >= 0.12.0
-- Python installed (`python3`, `python` or `py` available in PATH)
+- Desired language runtime(s) (`python`, etc.)
 
 ______________________________________________________________________
 
@@ -30,7 +30,11 @@ ______________________________________________________________________
   "TynK-M/nvim-serpy",
 
   config = function()
-    require("serpy").setup()
+    require("serpy").setup({
+      languages = {
+        python = { enabled = true },
+      },
+    })
   end,
 }
 ```
@@ -48,11 +52,16 @@ By default serpy adds:
 | `<leader>ph` | Search a term in pydoc |
 | `<leader>pw` | Search current word in pydoc |
 
-When triggering a run current file, serpy will:
+______________________________________________________________________
 
-1. Save the current buffer
-1. Open a bottom terminal split
-1. Execute the file using your configured Python command
+## How it works
+
+serpy uses a language registry system:
+
+1. Detects enabled languages from config
+1. Loads matching language modules (e.g. `lang/python.lua`)
+1. Validates required executables are available in PATH
+1. Delegates execution to the selected language module
 
 ______________________________________________________________________
 
@@ -60,28 +69,30 @@ ______________________________________________________________________
 
 ```lua
 require("serpy").setup({
+  languages = {
+    python = { enabled = true },
+  },
+
   keymaps = {
     enabled = true,
     pyrun_current = "<leader>pc",
-  }
+    pyrun_current_with_flags = "<leader>pf"
+    pydoc = "<leader>pd",
+    pydoc_current_word = "<leader>pw",
+  },
 })
 ```
 
 ______________________________________________________________________
 
-## How it works
+## Architecture
 
-serpy:
+serpy is build around a modular system:
 
-- Detects the current file path
-- Builds a command like:
-  ```bash
-  python3 file.py
-  ```
-- Opens a terminal split:
-  ```vim
-  botright 15split | terminal ...
-  ```
+- `registry.lua`: loads and manages language modules
+- `lang/*.lua`: language-specific implementations
+
+This design allows new languages to be added by simply dropping a module into the lang folder
 
 ______________________________________________________________________
 
