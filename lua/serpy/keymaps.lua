@@ -9,19 +9,24 @@ function M.setup(opts)
 	local km = opts.keymaps
 
 	map("n", km.pyrun_current, function()
-		require("serpy").runPyFile()
+		require("serpy").run("python")
 	end, { desc = "serpy: run current file" })
 
 	map("n", km.pyrun_current_with_flags, function()
-		require("serpy").runPyFileWithFlags()
+		vim.ui.input({ prompt = "Flags: " }, function(input)
+			require("serpy").run("python", input or "")
+		end)
 	end, { desc = "serpy: run current file with flags" })
 
 	map("n", km.pydoc, function()
-		require("serpy").pydoc()
+		vim.ui.input({ prompt = "Docs: " }, function(input)
+			require("serpy").docs("python", input or "")
+		end)
 	end, { desc = "serpy: search a term in the pydoc" })
 
 	map("n", km.pydoc_current_word, function()
-		require("serpy").pydocCurrentWord()
+		local word = vim.fn.expand("<cword>")
+		require("serpy").docs("python", word)
 	end, { desc = "serpy: search current word in the pydoc" })
 end
 

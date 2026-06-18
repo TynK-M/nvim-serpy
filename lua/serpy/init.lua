@@ -1,5 +1,5 @@
 local config = require("serpy.config")
-local utils = require("serpy.utils")
+local registry = require("serpy.registry")
 local logger = require("serpy.logger")
 
 local M = {}
@@ -8,72 +8,37 @@ M.options = {}
 
 function M.setup(opts)
 	M.options = config.setup(opts)
+	registry.load(M.options)
 
 	require("serpy.keymaps").setup(M.options)
 end
 
-local function _runPython(path, py, flags)
-	flags = flags or ""
-
-	vim.cmd("write")
-
-	vim.cmd("botright 15split")
-	vim.cmd("terminal " .. py .. " " .. vim.fn.shellescape(path) .. " " .. flags)
-	vim.cmd("startinsert")
-end
-
-local function _runPyDoc(py, term)
-	vim.cmd("botright 15split")
-	vim.cmd("terminal " .. py .. " -m pydoc " .. term)
-	vim.cmd("startinsert")
-end
-
-function M.runPyFile()
-	local py, path_or_err = utils.validatePythonFile()
-	if not py then
-		logger.error(path_or_err)
+function M.run(lang, ...)
+	local mod = registry.get(lang)
+	if not mod then
+		logger.error("Language not available: " .. lang)
 		return
 	end
 
-	_runPython(path_or_err, py)
+	local ok, err = mod.run(...)
+
+	if ok == false and err then
+		logger.error(err)
+	end
 end
 
-function M.runPyFileWithFlags()
-	local py, path_or_err = utils.validatePythonFile()
-	if not py then
-		logger.error(path_or_err)
+function M.docs(lang, ...)
+	local mod = registry.get(lang)
+	if not mod then
+		logger.error("Language not available: " .. lang)
 		return
 	end
 
-	local flags = ""
-	vim.ui.input({ prompt = "Flags: " }, function(input)
-		if input then
-			flags = input
-		end
-	end)
+	local ok, err = mod.docs(...)
 
-	_runPython(path_or_err, py, flags)
-end
-
-function M.pydoc()
-	local py = utils.getPythonCmd()
-
-	local term = ""
-	vim.ui.input({ prompt = "Docs " }, function(input)
-		if input then
-			term = input
-		end
-	end)
-
-	_runPyDoc(py, term)
-end
-
-function M.pydocCurrentWord()
-	local py = utils.getPythonCmd()
-
-	local term = utils.getCurrentWord()
-
-	_runPyDoc(py, term)
+	if ok == false and err then
+		logger.error(err)
+	end
 end
 
 return M

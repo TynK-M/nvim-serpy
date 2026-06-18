@@ -1,6 +1,10 @@
 local M = {}
 
 M.defaults = {
+	languages = {
+		python = { enabled = true },
+	},
+
 	keymaps = {
 		enabled = true,
 
