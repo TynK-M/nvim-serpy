@@ -3,15 +3,20 @@ local M = {}
 M.defaults = {
 	languages = {
 		python = { enabled = true },
+		lua = { enabled = true },
 	},
 
 	keymaps = {
 		enabled = true,
 
+		-- Python
 		pyrun_current = "<leader>pc",
 		pyrun_current_with_flags = "<leader>pf",
 		pydoc = "<leader>pd",
 		pydoc_current_word = "<leader>pw",
+
+		-- Lua
+		luarun_current = "<leader>lc",
 	},
 }
 
