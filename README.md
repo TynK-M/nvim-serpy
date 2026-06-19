@@ -4,7 +4,7 @@ A minimal Neovim plugin for running and interacting with code from multiple prog
 
 ______________________________________________________________________
 
-## Languages:
+## Languages
 
 serpy supports the following languages:
 
@@ -26,7 +26,7 @@ ______________________________________________________________________
 ## Requirements
 
 - Neovim >= 0.12.0
-- Desired language runtime(s) (`python`, etc.)
+- Desired language runtime(s) (`python`, `lua`, etc.)
 
 ______________________________________________________________________
 
@@ -60,6 +60,7 @@ By default serpy adds:
 | `<leader>pf` | Run current Python file with flags |
 | `<leader>ph` | Search a term in pydoc |
 | `<leader>pw` | Search current word in pydoc |
+|`<leader>lc`| Run current Lua file|
 
 ______________________________________________________________________
 
@@ -80,14 +81,18 @@ ______________________________________________________________________
 require("serpy").setup({
   languages = {
     python = { enabled = true },
+    lua = { enabled = true },
   },
 
   keymaps = {
     enabled = true,
+
     pyrun_current = "<leader>pc",
     pyrun_current_with_flags = "<leader>pf"
     pydoc = "<leader>pd",
     pydoc_current_word = "<leader>pw",
+
+    luarun_current = "<leader>lc",
   },
 })
 ```
