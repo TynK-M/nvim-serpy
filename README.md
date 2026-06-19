@@ -4,6 +4,15 @@ A minimal Neovim plugin for running and interacting with code from multiple prog
 
 ______________________________________________________________________
 
+## Languages:
+
+serpy supports the following languages:
+
+- `python`
+- `lua`
+
+______________________________________________________________________
+
 ## Features
 
 - Run the current file based on detected/selected language
