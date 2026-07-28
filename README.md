@@ -50,20 +50,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-## Usage
-
-By default serpy adds:
-
-| Keymap | Action |
-| ------------ | ----------------------- |
-| `<leader>pc` | Run current Python file |
-| `<leader>pf` | Run current Python file with flags |
-| `<leader>ph` | Search a term in pydoc |
-| `<leader>pw` | Search current word in pydoc |
-|`<leader>lc`| Run current Lua file|
-
-______________________________________________________________________
-
 ## How it works
 
 serpy uses a language registry system:
@@ -87,12 +73,12 @@ require("serpy").setup({
   keymaps = {
     enabled = true,
 
-    pyrun_current = "<leader>pc",
-    pyrun_current_with_flags = "<leader>pf"
-    pydoc = "<leader>pd",
-    pydoc_current_word = "<leader>pw",
+    pyrun_current = "<leader>pc", -- Change to the preffered key
+    pyrun_current_with_flags = "<leader>pf", -- Change to the preffered key
+    pydoc = "<leader>pd", -- Change to the preffered key
+    pydoc_current_word = "<leader>pw", -- Change to the preffered key
 
-    luarun_current = "<leader>lc",
+    luarun_current = "<leader>lc", -- Change to the preffered key
   },
 })
 ```
