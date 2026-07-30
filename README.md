@@ -6,10 +6,11 @@ ______________________________________________________________________
 
 ## Languages
 
-serpy supports the following languages:
+serpy supports the following languages with the relative features:
 
-- `python`
-- `lua`
+- `python`: run current file with or without flags, pydoc search and pydoc current word
+- `lua`: run current file
+- `zig`: build run current folder
 
 ______________________________________________________________________
 
@@ -68,6 +69,7 @@ require("serpy").setup({
   languages = {
     python = { enabled = true },
     lua = { enabled = true },
+    zig = { enabled = true },
   },
 
   keymaps = {
@@ -79,6 +81,8 @@ require("serpy").setup({
     pydoc_current_word = "<leader>pw", -- Change to the preffered key
 
     luarun_current = "<leader>lc", -- Change to the preffered key
+
+    zigbuildrun = "<leader>zbr", -- Change to the preferred key
   },
 })
 ```

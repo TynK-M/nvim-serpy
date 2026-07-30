@@ -4,6 +4,10 @@ function M.getCurrentWord()
 	return vim.fn.expand("<cword>") or ""
 end
 
+function M.getOpenDirPath()
+	return vim.fn.expand("%:h")
+end
+
 function M.getOpenFilePath()
 	return vim.fn.expand("%")
 end

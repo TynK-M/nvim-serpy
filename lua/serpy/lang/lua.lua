@@ -26,7 +26,7 @@ function M.validate()
 	return path
 end
 
-function M.run(...)
+function M.run()
 	local path, err = M.validate()
 
 	if not path then
@@ -40,6 +40,6 @@ function M.run(...)
 	return true
 end
 
-function M.docs(term) end
+function M.docs() end
 
 return M

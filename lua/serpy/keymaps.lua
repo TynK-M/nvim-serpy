@@ -44,6 +44,13 @@ function M.setup(opts)
 			require("serpy").run("lua")
 		end, { desc = "serpy(lua): run current file" })
 	end
+
+	-- Zig
+	if km.zigbuildrun ~= nil then
+		map("n", km.zigbuildrun, function()
+			require("serpy").run("zig")
+		end, { desc = "serpy(zig): build and run current folder" })
+	end
 end
 
 return M

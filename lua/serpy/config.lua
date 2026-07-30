@@ -4,6 +4,7 @@ M.defaults = {
 	languages = {
 		python = { enabled = true },
 		lua = { enabled = true },
+		zig = { enabled = true },
 	},
 
 	keymaps = {
