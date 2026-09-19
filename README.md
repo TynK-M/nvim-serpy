@@ -39,6 +39,12 @@ ______________________________________________________________________
 {
   "TynK-M/nvim-serpy",
 
+  dependencies = {
+    -- Recommended dependencies, only optional
+    -- "akinsho/toggleterm.nvim",
+    -- "folke/noice.nvim"
+  },
+
   config = function()
     require("serpy").setup({
       languages = {
