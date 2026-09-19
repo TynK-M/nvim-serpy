@@ -4,8 +4,15 @@ local logger = require("serpy.logger")
 
 local M = {}
 
+---@type SerpyConfig
 M.options = {}
 
+---Setup Serpy.
+---
+---Applies the provided configuration, loads the configured languages and
+---initializes Serpy keymaps.
+---
+---@param opts? SerpyConfig User configuration.
 function M.setup(opts)
 	M.options = config.setup(opts)
 	registry.load(M.options)
@@ -13,6 +20,10 @@ function M.setup(opts)
 	require("serpy.keymaps").setup(M.options)
 end
 
+---Run a language-specific Serpy action.
+---
+---@param lang string Language identifier registered with Serpy.
+---@param ... any Arguments passed to the language module's `run` function.
 function M.run(lang, ...)
 	local mod = registry.get(lang)
 	if not mod then
@@ -27,6 +38,10 @@ function M.run(lang, ...)
 	end
 end
 
+---Show documentation for a language.
+---
+---@param lang string Language identifier registered with Serpy.
+---@param ... any Arguments passed to the language module's `docs` function.
 function M.docs(lang, ...)
 	local mod = registry.get(lang)
 	if not mod then

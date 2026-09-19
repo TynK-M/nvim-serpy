@@ -2,16 +2,28 @@ local utils = require("serpy.utils")
 
 local M = {}
 
+---@type string
 M.name = "lua"
 
+---Check whether Lua support is available.
+---
+---@return boolean available Always returns `true` because Lua support is
+---provided by Neovim itself.
 function M.available()
 	return true
 end
 
+---Get the command used to execute a Lua file.
+---
+---@return string command Vim command used to run the current Lua file.
 function M.cmd()
 	return "luafile"
 end
 
+---Validate the current buffer for Lua execution.
+---
+---@return string? path Path to the current Lua file.
+---@return string? error Error message when validation fails.
 function M.validate()
 	local path = utils.getOpenFilePath()
 
@@ -26,6 +38,10 @@ function M.validate()
 	return path
 end
 
+---Run the current Lua file.
+---
+---@return boolean success Whether the file was successfully executed.
+---@return string? error Error message when validation fails.
 function M.run()
 	local path, err = M.validate()
 
@@ -40,6 +56,9 @@ function M.run()
 	return true
 end
 
+---Show Lua documentation.
+---
+---TODO: implement Lua documentation lookup
 function M.docs() end
 
 return M

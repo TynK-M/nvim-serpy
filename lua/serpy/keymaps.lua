@@ -1,5 +1,11 @@
 local M = {}
 
+---Setup Serpy keymaps.
+---
+---Keymaps are only created when `opts.keymaps.enabled` is `true`.
+---Individual keymaps can be disabled by setting their value to `nil`.
+---
+---@param opts SerpyConfig Serpy configuration.
 function M.setup(opts)
 	if not opts.keymaps.enabled then
 		return

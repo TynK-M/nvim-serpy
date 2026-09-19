@@ -7,6 +7,9 @@ local registry = require("serpy.registry")
 
 local M = {}
 
+---Check whether the running Neovim version is supported.
+---
+---@return boolean supported Wheter the current Neovim version is supported.
 local function check_neovim_version()
 	if vim.fn.has("nvim-0.12.0") ~= 1 then
 		error("serpy requires Neovim >= 0.12.0")
@@ -17,6 +20,9 @@ local function check_neovim_version()
 	return true
 end
 
+---Check whether the main Serpy module can be loaded.
+---
+---@return boolean loadable Wheter the Serpy module loaded successfully.
 local function check_serpy_module()
 	local ok_load, serpy = pcall(require, "serpy")
 
@@ -29,11 +35,17 @@ local function check_serpy_module()
 	return false
 end
 
+---Check whether registered languages are available.
+---
+---Each registered language may optionally provide an `available` function
+---that checks whether its dependencies are installed.
+---
+---@return boolean available Whether at least one language is registered.
 local function check_languages()
 	local langs = registry.all()
 
 	if vim.tbl_isempty(langs) then
-		warn("No languages laoded (check config)")
+		warn("No languages loaded (check config)")
 		return false
 	end
 
@@ -54,6 +66,9 @@ local function check_languages()
 	return true
 end
 
+---Run Serpy health checks.
+---
+---This function is called by `:checkhealth serpy`.
 function M.check()
 	start("serpy")
 
