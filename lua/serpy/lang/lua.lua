@@ -56,9 +56,15 @@ function M.run()
 	return true
 end
 
----Show Lua documentation.
+---Open Lua documentation for a term.
 ---
----TODO: implement Lua documentation lookup
-function M.docs() end
+---Uses Lua's Vim LSP command to display the documentation.
+---
+---@return boolean success Whether the documentation command was started.
+function M.docs()
+	vim.lsp.buf.hover()
+
+	return true
+end
 
 return M

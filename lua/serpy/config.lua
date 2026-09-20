@@ -12,6 +12,8 @@ local M = {}
 ---@field pydoc_current_word? string Keymap for searching the current word in
 ---Python documentation.
 ---@field luarun_current? string Keymap for running the current Lua file.
+---@field luadoc_current_word? string Keymap for searching the current word in
+---Lua documentation.
 ---@field zigbuildrun? string Keymap for building and running the current Zig
 ---project.
 

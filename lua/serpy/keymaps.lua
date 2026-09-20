@@ -51,6 +51,13 @@ function M.setup(opts)
 		end, { desc = "serpy(lua): run current file" })
 	end
 
+	if km.luadoc_current_word ~= nil then
+		map("n", km.luadoc_current_word, function()
+			local word = vim.fn.expand("<cword>")
+			require("serpy").docs("lua", word)
+		end, { desc = "serpy(lua): search current word in the vim.lsp" })
+	end
+
 	-- Zig
 	if km.zigbuildrun ~= nil then
 		map("n", km.zigbuildrun, function()
