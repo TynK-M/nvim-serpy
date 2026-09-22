@@ -9,7 +9,7 @@ ______________________________________________________________________
 serpy supports the following languages with the relative features:
 
 - `python`: run current file with or without flags, pydoc search and pydoc current word
-- `lua`: run current file
+- `lua`: run current file, look in LSP for documentation
 - `zig`: build run current folder
 
 ______________________________________________________________________
@@ -45,6 +45,10 @@ ______________________________________________________________________
     -- "folke/noice.nvim"
   },
 
+  -- For more options regarding the configuration, look the
+  -- ## Configuration section in the README.
+  --
+  -- This is only a minimal example.
   config = function()
     require("serpy").setup({
       languages = {
@@ -72,6 +76,8 @@ ______________________________________________________________________
 
 ```lua
 require("serpy").setup({
+  -- When a language is not specified, it's `enabled` value
+  -- is automatically set to `false`.
   languages = {
     python = { enabled = true },
     lua = { enabled = true },

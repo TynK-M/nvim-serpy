@@ -67,6 +67,9 @@ end
 ---Show Zig documentation.
 ---
 ---TODO: implement Zig documentation lookup.
+---
+---For now this can't be done as Zig doesn't expose a command to look in
+---the documentation.
 function M.docs() end
 
 return M
